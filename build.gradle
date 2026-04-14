@@ -41,6 +41,8 @@ dependencies {
 
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2'
 }
 
 tasks.named('test') {

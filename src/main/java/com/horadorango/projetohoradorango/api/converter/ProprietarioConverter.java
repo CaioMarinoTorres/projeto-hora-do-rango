@@ -5,13 +5,19 @@ import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioRespo
 import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioUpdateRequest;
 import com.horadorango.projetohoradorango.domain.entity.Proprietario;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ProprietarioConverter {
 
+    @Mapping(target = "id", ignore = true)
     Proprietario toEntity(ProprietarioRequest request);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "cpf", ignore = true)
     Proprietario toEntity(ProprietarioUpdateRequest request);
+
+    Proprietario ResponseToEntity(ProprietarioResponse response);
 
     ProprietarioResponse toResponse(Proprietario entity);
 

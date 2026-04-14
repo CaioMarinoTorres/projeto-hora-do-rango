@@ -32,10 +32,6 @@ public class Item {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "id_cardapio")
-    private Cardapio cardapio;
-
     @Column(name = "nome", nullable = false)
     private String nome;
 

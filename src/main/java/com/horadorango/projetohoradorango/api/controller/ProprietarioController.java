@@ -5,8 +5,8 @@ import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioReque
 import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioResponse;
 import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioUpdateRequest;
 import com.horadorango.projetohoradorango.domain.entity.Proprietario;
-import com.horadorango.projetohoradorango.domain.repository.ProprietarioRepository;
 import com.horadorango.projetohoradorango.domain.service.ProprietarioService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,35 +29,34 @@ import java.util.List;
 public class ProprietarioController {
 
     private final ProprietarioService service;
-    private final ProprietarioConverter converter;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Salva um novo proprietário", description = "Cria um novo proprietário com base nos dados fornecidos.")
     public ResponseEntity<ProprietarioResponse> save(@Valid @RequestBody ProprietarioRequest request) {
-        Proprietario proprietario = converter.toEntity(request);
-        Proprietario savedProprietario = service.save(proprietario);
-        return ResponseEntity.ok(converter.toResponse(savedProprietario));
+        return ResponseEntity.ok(service.save(request));
     }
 
     @GetMapping
+    @Operation(summary = "Lista todos os proprietários", description = "Retorna uma lista com todos os proprietários cadastrados.")
     public List<Proprietario> findAll(){
         return service.findAll();
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Busca um proprietário por ID", description = "Retorna os detalhes de um proprietário com base no ID fornecido.")
     public ResponseEntity<ProprietarioResponse> findById(@PathVariable Long id){
-        Proprietario entity = service.findById(id);
-        return ResponseEntity.ok(converter.toResponse(entity));
+        return ResponseEntity.ok(service.findByIdResponse(id));
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Atualiza um proprietário existente", description = "Atualiza os detalhes de um proprietário com base no ID fornecido e nos dados fornecidos.")
     public ResponseEntity<ProprietarioResponse> update(@PathVariable Long id, @Valid @RequestBody ProprietarioUpdateRequest request){
-        Proprietario entity = converter.toEntity(request);
-        Proprietario updateEntity = service.update(entity, id);
-        return ResponseEntity.ok(converter.toResponse(updateEntity));
+        return ResponseEntity.ok(service.update(request, id));
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Exclui um proprietário", description = "Exclui um proprietário com base no ID fornecido.")
     public ResponseEntity<Void> delete(@PathVariable Long id){
        service.delete(id);
        return ResponseEntity.noContent().build();

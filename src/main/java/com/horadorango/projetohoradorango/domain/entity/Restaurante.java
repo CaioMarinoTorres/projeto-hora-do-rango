@@ -45,6 +45,4 @@ public class Restaurante {
     @JoinColumn(name = "id_proprietario")
     private Proprietario proprietario;
 
-    @OneToMany
-    private List<Cardapio> cardapio;
 }
