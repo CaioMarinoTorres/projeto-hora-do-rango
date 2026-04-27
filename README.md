@@ -1,6 +1,5 @@
 # 🍽️ Hora do Rango API
 
-![CI](https://github.com/CaioMarinoTorres/projeto-hora-do-rango/actions/workflows/ci.yml/badge.svg)
 ![Java](https://img.shields.io/badge/Java-17+-orange)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen)
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
