@@ -14,6 +14,8 @@ public interface RestauranteConverter {
     @Mapping(target = "proprietario", ignore = true)
     Restaurante toEntity(RestauranteRequest request);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "proprietario.id", source = "proprietarioId")
     @Mapping(target = "cnpj", ignore = true)
     Restaurante toEntity(RestauranteUpdateRequest request);
 

@@ -7,6 +7,8 @@ import com.horadorango.projetohoradorango.domain.entity.Proprietario;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface ProprietarioConverter {
 
@@ -21,4 +23,5 @@ public interface ProprietarioConverter {
 
     ProprietarioResponse toResponse(Proprietario entity);
 
+    List<ProprietarioResponse> toResponse(List<Proprietario> entities);
 }

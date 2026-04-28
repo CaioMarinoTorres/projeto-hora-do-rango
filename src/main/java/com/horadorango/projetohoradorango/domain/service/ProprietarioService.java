@@ -24,19 +24,21 @@ public class ProprietarioService {
     @Transactional
     public ProprietarioResponse save(ProprietarioRequest request) {
         Proprietario proprietario = converter.toEntity(request);
+
         if (cadastroJaExiste(proprietario)){
             throw new DataConflictException("Este CPF já está cadastrado");
         }
-        repository.save(proprietario);
-        return converter.toResponse(proprietario);
+
+        Proprietario proprietarioSaved = repository.save(proprietario);
+        return converter.toResponse(proprietarioSaved);
     }
 
     @Transactional
     public ProprietarioResponse update(ProprietarioUpdateRequest request, Long id){
         Proprietario proprietario = findById(id);
         proprietario.setNome(request.getNome());
-        repository.save(proprietario);
-        return converter.toResponse(proprietario);
+        Proprietario propUpdate = repository.save(proprietario);
+        return converter.toResponse(propUpdate);
     }
 
     @Transactional
@@ -45,8 +47,8 @@ public class ProprietarioService {
         repository.deleteById(id);
     }
 
-    public List<Proprietario> findAll(){
-        return repository.findAll();
+    public List<ProprietarioResponse> findAll(){
+        return converter.toResponse(repository.findAll());
     }
 
     public ProprietarioResponse findByIdResponse(Long id){
@@ -58,8 +60,7 @@ public class ProprietarioService {
     }
 
     private Boolean cadastroJaExiste(Proprietario proprietario){
-        return repository.findAllByCpf(proprietario.getCpf())
-                .filter(p -> !p.equals(proprietario))
+        return repository.findByCpf(proprietario.getCpf())
                 .isPresent();
     }
 

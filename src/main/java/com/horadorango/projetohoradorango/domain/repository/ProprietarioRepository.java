@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface ProprietarioRepository extends JpaRepository<Proprietario, Long> {
 
-    Optional<Proprietario> findAllByCpf(String cpf);
+    Optional<Proprietario> findByCpf(String cpf);
 
 }

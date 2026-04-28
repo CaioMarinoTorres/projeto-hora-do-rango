@@ -6,15 +6,20 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Data
 @Entity
-@RequiredArgsConstructor
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = Proprietario.TABLE_NAME)
 public class Proprietario {
@@ -36,3 +41,4 @@ public class Proprietario {
     private String cpf;
 
 }
+

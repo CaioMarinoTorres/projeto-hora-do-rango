@@ -1,6 +1,5 @@
 package com.horadorango.projetohoradorango.api.controller;
 
-import com.horadorango.projetohoradorango.api.converter.ProprietarioConverter;
 import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioRequest;
 import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioResponse;
 import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioUpdateRequest;
@@ -39,8 +38,8 @@ public class ProprietarioController {
 
     @GetMapping
     @Operation(summary = "Lista todos os proprietários", description = "Retorna uma lista com todos os proprietários cadastrados.")
-    public List<Proprietario> findAll(){
-        return service.findAll();
+    public ResponseEntity<List<ProprietarioResponse>> findAll(){
+        return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/{id}")
