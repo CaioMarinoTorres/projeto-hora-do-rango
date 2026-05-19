@@ -32,7 +32,7 @@ public class Cardapio {
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = SEQUENCE, generator = SEQ_NAME)
     @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id_cardapio", nullable = false)
     private Long id;
 
     @Column(name = "nome", nullable = false)

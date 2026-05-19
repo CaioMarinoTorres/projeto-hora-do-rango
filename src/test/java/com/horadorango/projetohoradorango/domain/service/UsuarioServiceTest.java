@@ -1,9 +1,9 @@
 package com.horadorango.projetohoradorango.domain.service;
 
 import com.horadorango.projetohoradorango.api.converter.ProprietarioConverter;
-import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioRequest;
-import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioResponse;
-import com.horadorango.projetohoradorango.domain.entity.Proprietario;
+import com.horadorango.projetohoradorango.api.dto.usuario.UsuarioRequest;
+import com.horadorango.projetohoradorango.api.dto.usuario.UsuarioResponse;
+import com.horadorango.projetohoradorango.domain.entity.Usuario;
 import com.horadorango.projetohoradorango.domain.exeption.DataConflictException;
 import com.horadorango.projetohoradorango.domain.exeption.DataNotFoundException;
 import com.horadorango.projetohoradorango.domain.repository.ProprietarioRepository;
@@ -27,7 +27,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ProprietarioServiceTest {
+class UsuarioServiceTest {
 
     @Mock
     private ProprietarioRepository repository;
@@ -36,30 +36,30 @@ class ProprietarioServiceTest {
     private ProprietarioConverter converter;
 
     @InjectMocks
-    private ProprietarioService service;
+    private UsuarioService service;
 
-    private ProprietarioResponse response;
-    private ProprietarioRequest request;
-    private Proprietario entity;
+    private UsuarioResponse response;
+    private UsuarioRequest request;
+    private Usuario entity;
 
     @BeforeEach
     void setUp() {
-        String nome = "Nazário da Silva";
+        String nome = "Teste teste";
         String cpf = "123.456.789-00";
         long id = 1L;
 
-        response = ProprietarioResponse.builder()
+        response = UsuarioResponse.builder()
                 .nome(nome)
                 .cpf(cpf)
                 .id(id)
                 .build();
 
-        request = ProprietarioRequest.builder()
+        request = UsuarioRequest.builder()
                 .nome(nome)
                 .cpf(cpf)
                 .build();
 
-        entity = Proprietario.builder()
+        entity = Usuario.builder()
                 .nome(nome)
                 .cpf(cpf)
                 .id(id)
@@ -71,17 +71,17 @@ class ProprietarioServiceTest {
     @Test
     @DisplayName("Deve salvar proprietário quando CPF não existir")
     void deveSalvarProprietarioQuandoCpfNaoExistir() {
-        Proprietario propBeforeSave = Proprietario.builder()
+        Usuario propBeforeSave = Usuario.builder()
                 .nome(entity.getNome())
                 .cpf(entity.getCpf())
                 .build();
 
         when(repository.findByCpf(entity.getCpf())).thenReturn(Optional.empty());
-        when(converter.toResponse(entity)).thenReturn(response);
         when(converter.toEntity(request)).thenReturn(propBeforeSave);
         when(repository.save(propBeforeSave)).thenReturn(entity);
+        when(converter.toResponse(entity)).thenReturn(response);
 
-        ProprietarioResponse response = service.save(request);
+        UsuarioResponse response = service.save(request);
 
         verify(repository, times(1)).findByCpf(entity.getCpf());
         verify(repository, times(1)).save(propBeforeSave);
@@ -107,11 +107,11 @@ class ProprietarioServiceTest {
     @DisplayName("Deve atualizar proprietário quando o proprietario existir")
     void deveAtualizarProprietario()
     {
-        ProprietarioRequest proprietarioUpdate = ProprietarioRequest.builder()
+        UsuarioRequest proprietarioUpdate = UsuarioRequest.builder()
                 .nome("Nome Atualizado")
                 .build();
 
-        Proprietario proprietarioAfterSave = Proprietario.builder()
+        Usuario usuarioAfterSave = Usuario.builder()
                 .nome(proprietarioUpdate.getNome())
                 .cpf(entity.getCpf())
                 .id(entity.getId())
@@ -120,10 +120,10 @@ class ProprietarioServiceTest {
         response.setNome(proprietarioUpdate.getNome());
 
         when(repository.findById(entity.getId())).thenReturn(Optional.of(entity));
-        when(converter.toResponse(proprietarioAfterSave)).thenReturn(response);
-        when(repository.save(proprietarioAfterSave)).thenReturn(proprietarioAfterSave);
+        when(converter.toResponse(usuarioAfterSave)).thenReturn(response);
+        when(repository.save(usuarioAfterSave)).thenReturn(usuarioAfterSave);
 
-        ProprietarioResponse response = service.update(proprietarioUpdate, entity.getId());
+        UsuarioResponse response = service.update(proprietarioUpdate, entity.getId());
 
         verify(repository, times(1)).findById(entity.getId());
         verify(repository, times(1)).save(entity);
@@ -219,7 +219,7 @@ class ProprietarioServiceTest {
     void deveRetornarVerdadeiroQuandoProprietarioExistirPorCpf() {
         when(repository.findByCpf(entity.getCpf())).thenReturn(Optional.of(entity));
 
-        Optional<Proprietario> proprietarioOptional = repository.findByCpf(entity.getCpf());
+        Optional<Usuario> proprietarioOptional = repository.findByCpf(entity.getCpf());
 
         assertTrue(proprietarioOptional.isPresent());
     }
@@ -229,7 +229,7 @@ class ProprietarioServiceTest {
     void deveRetornarFalsoQuandoProprietarioNaoExistirPorCpf() {
         when(repository.findByCpf(entity.getCpf())).thenReturn(Optional.empty());
 
-        Optional<Proprietario> proprietarioOptional = repository.findByCpf(entity.getCpf());
+        Optional<Usuario> proprietarioOptional = repository.findByCpf(entity.getCpf());
 
         assertTrue(proprietarioOptional.isEmpty());
     }

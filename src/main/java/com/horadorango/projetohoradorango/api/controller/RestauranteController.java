@@ -7,7 +7,6 @@ import com.horadorango.projetohoradorango.domain.service.RestauranteService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.CREATED;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/restaurantes")
@@ -29,7 +30,7 @@ public class RestauranteController {
     private final RestauranteService service;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(CREATED)
     @Operation(summary = "Cadastra um novo restaurante", description = "Cadastra um novo restaurante com base nos dados fornecidos.")
     public ResponseEntity<RestauranteResponse> save(@Valid @RequestBody RestauranteRequest request){
         return ResponseEntity.ok(service.save(request));

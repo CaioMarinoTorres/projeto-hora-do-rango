@@ -1,8 +1,7 @@
-package com.horadorango.projetohoradorango.api.dto.proprietario;
+package com.horadorango.projetohoradorango.api.dto.usuario;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -15,12 +14,18 @@ import org.hibernate.validator.constraints.br.CPF;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ProprietarioRequest extends ProprietarioUpdateRequest {
+public class UsuarioRequest extends UsuarioUpdateRequest {
 
+    @NotBlank
+    @Length(max = 60)
+    private String email;
+
+    @NotBlank
+    @Length(max = 60)
+    private String senha;
 
     @CPF
     @NotBlank
     private String cpf;
-
 
 }

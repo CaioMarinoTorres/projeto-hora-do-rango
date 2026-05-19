@@ -1,11 +1,13 @@
 package com.horadorango.projetohoradorango.api.dto.restaurante;
 
-import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioResponse;
+import com.horadorango.projetohoradorango.api.dto.usuario.UsuarioResponse;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class RestauranteResponse {
@@ -15,7 +17,5 @@ public class RestauranteResponse {
     private String nome;
 
     private String cnpj;
-
-    private ProprietarioResponse proprietario;
 
 }

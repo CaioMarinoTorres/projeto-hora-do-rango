@@ -7,18 +7,21 @@ import com.horadorango.projetohoradorango.domain.entity.Restaurante;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface RestauranteConverter {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "proprietario", ignore = true)
+    @Mapping(target = "colaboradores", ignore = true)
     Restaurante toEntity(RestauranteRequest request);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "proprietario.id", source = "proprietarioId")
     @Mapping(target = "cnpj", ignore = true)
     Restaurante toEntity(RestauranteUpdateRequest request);
 
     RestauranteResponse toResponse(Restaurante entity);
+
+    List<RestauranteResponse> toResponse(List<Restaurante> entity);
 
 }

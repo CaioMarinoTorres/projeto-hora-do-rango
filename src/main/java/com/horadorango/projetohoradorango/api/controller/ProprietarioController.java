@@ -1,10 +1,9 @@
 package com.horadorango.projetohoradorango.api.controller;
 
-import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioRequest;
-import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioResponse;
-import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioUpdateRequest;
-import com.horadorango.projetohoradorango.domain.entity.Proprietario;
-import com.horadorango.projetohoradorango.domain.service.ProprietarioService;
+import com.horadorango.projetohoradorango.api.dto.usuario.UsuarioRequest;
+import com.horadorango.projetohoradorango.api.dto.usuario.UsuarioResponse;
+import com.horadorango.projetohoradorango.api.dto.usuario.UsuarioUpdateRequest;
+import com.horadorango.projetohoradorango.domain.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,30 +26,30 @@ import java.util.List;
 @RequestMapping("/proprietarios")
 public class ProprietarioController {
 
-    private final ProprietarioService service;
+    private final UsuarioService service;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Salva um novo proprietário", description = "Cria um novo proprietário com base nos dados fornecidos.")
-    public ResponseEntity<ProprietarioResponse> save(@Valid @RequestBody ProprietarioRequest request) {
+    public ResponseEntity<UsuarioResponse> save(@Valid @RequestBody UsuarioRequest request) {
         return ResponseEntity.ok(service.save(request));
     }
 
     @GetMapping
     @Operation(summary = "Lista todos os proprietários", description = "Retorna uma lista com todos os proprietários cadastrados.")
-    public ResponseEntity<List<ProprietarioResponse>> findAll(){
+    public ResponseEntity<List<UsuarioResponse>> findAll(){
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Busca um proprietário por ID", description = "Retorna os detalhes de um proprietário com base no ID fornecido.")
-    public ResponseEntity<ProprietarioResponse> findById(@PathVariable Long id){
+    public ResponseEntity<UsuarioResponse> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findByIdResponse(id));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza um proprietário existente", description = "Atualiza os detalhes de um proprietário com base no ID fornecido e nos dados fornecidos.")
-    public ResponseEntity<ProprietarioResponse> update(@PathVariable Long id, @Valid @RequestBody ProprietarioUpdateRequest request){
+    public ResponseEntity<UsuarioResponse> update(@PathVariable Long id, @Valid @RequestBody UsuarioUpdateRequest request){
         return ResponseEntity.ok(service.update(request, id));
     }
 

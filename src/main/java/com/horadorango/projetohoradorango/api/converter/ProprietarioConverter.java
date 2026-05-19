@@ -1,9 +1,9 @@
 package com.horadorango.projetohoradorango.api.converter;
 
-import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioRequest;
-import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioResponse;
-import com.horadorango.projetohoradorango.api.dto.proprietario.ProprietarioUpdateRequest;
-import com.horadorango.projetohoradorango.domain.entity.Proprietario;
+import com.horadorango.projetohoradorango.api.dto.usuario.UsuarioRequest;
+import com.horadorango.projetohoradorango.api.dto.usuario.UsuarioResponse;
+import com.horadorango.projetohoradorango.api.dto.usuario.UsuarioUpdateRequest;
+import com.horadorango.projetohoradorango.domain.entity.Usuario;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -13,15 +13,15 @@ import java.util.List;
 public interface ProprietarioConverter {
 
     @Mapping(target = "id", ignore = true)
-    Proprietario toEntity(ProprietarioRequest request);
+    Usuario toEntity(UsuarioRequest request);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "cpf", ignore = true)
-    Proprietario toEntity(ProprietarioUpdateRequest request);
+    Usuario toEntity(UsuarioUpdateRequest request);
 
-    Proprietario ResponseToEntity(ProprietarioResponse response);
+    Usuario ResponseToEntity(UsuarioResponse response);
 
-    ProprietarioResponse toResponse(Proprietario entity);
+    UsuarioResponse toResponse(Usuario entity);
 
-    List<ProprietarioResponse> toResponse(List<Proprietario> entities);
+    List<UsuarioResponse> toResponse(List<Usuario> entities);
 }
